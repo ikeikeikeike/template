@@ -1,0 +1,13 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '<%= node[:myapp][:db_name] %>',
+        'USER': '<%= node[:myapp][:db_user] %>',
+        'PASSWORD': '<%= node[:myapp][:db_password] %>',
+        'HOST': '<%= node[:myapp][:db_host] %>',
+        'PORT': '',
+    }
+}
+
+MYAPP_USERNAME = "<%= node[:myapp][:my_username] %>"
+MYAPP_PASSWORD = "<%= node[:myapp][:my_password] %>"
