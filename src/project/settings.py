@@ -2,7 +2,7 @@
 
 import os
 
-PROJECT_ROOT = os.getenv('PROJECT_ROOT') or os.path.join(os.path.dirname(__file__), '../..')
+PROJECT_ROOT = os.environ.get('PROJECT_ROOT', os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
