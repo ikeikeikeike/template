@@ -22,18 +22,42 @@ PYTHON_PIPS = {
   "python-memcached" => "latest",
 }
 
+# application directories
+["#{app_dir}", "#{app_dir}/bin"].each do |dir|
+  directory dir do
+    owner app_node[:owner]
+    group app_node[:group]
+    mode '0755'
+    recursive true
+  end
+end
+
+# symbolic links
+if app_node[:vagrant_links]
+  app_node[:vagrant_links].each do |name|
+    link "#{app_dir}/#{name}" do
+      to "/vagrant/#{name}"
+      owner app_node[:owner]
+      group app_node[:group]
+    end
+  end
+end
+
+# settings_local.py
+if app_node[:settings_local]
+  template "#{app_dir}/etc/settings_local.py" do
+    source app_node[:settings_local]
+    owner app_node[:owner]
+    group app_node[:group]
+    mode "0644"
+  end
+end
+
 # python setup
 
 package "python-dev"
 package "python-pip"
 package "python-virtualenv"
-
-directory app_dir do
-  owner app_node[:owner]
-  group app_node[:group]
-  mode '0755'
-  recursive true
-end
 
 python_virtualenv app_id do
   path "#{app_dir}/env"
@@ -97,7 +121,7 @@ file "#{app_dir}/bin/manage.py" do
   content <<-EOH
 #!/bin/sh
 . #{app_dir}/env/bin/activate
-cd #{app_dir}/src
+cd #{app_dir}
 export PROJECT_ROOT=#{app_dir}
 export PYTHONPATH=#{app_dir}/src
 python manage.py $@
