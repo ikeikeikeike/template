@@ -10,11 +10,12 @@ Vagrant::Config.run do |config|
   config.vm.box_url = BOX_URL
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = COOKBOOKS_PATH
-    chef.add_recipe("myapp")
+    chef.add_recipe("myapp::django")
     chef.json = {
       :myapp => {
         :owner => 'vagrant',
         :group => 'vagrant',
+        :settings => 'project.settings_devel',
         :web_port => '8000',
         # for vagrant
         :vagrant_links => ['etc', 'log', 'src'],

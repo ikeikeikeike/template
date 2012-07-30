@@ -1,3 +1,5 @@
+from .settings import *
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -17,5 +19,5 @@ CACHES = {
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
-MYAPP_USERNAME = "<%= node[:myapp][:my_username] %>"
-MYAPP_PASSWORD = "<%= node[:myapp][:my_password] %>"
+MYAPP_USERNAME = 'foo@domain'
+MYAPP_PASSWORD = '12345678'

@@ -31,4 +31,4 @@ errorlog = "<%= @app_dir %>/log/gunicorn_error.log"
 proc_name = "<%= @app_id %>"
 
 # The Python path to a Django settings module.
-django_settings = "project.settings"
+django_settings = "<%= @app_node[:settings] %>"
