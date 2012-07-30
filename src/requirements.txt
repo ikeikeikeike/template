@@ -1,0 +1,9 @@
+# for Django
+Django
+MySQL-python
+gunicorn
+python-memcached
+pytz
+setproctitle
+# for Celery
+django-celery
