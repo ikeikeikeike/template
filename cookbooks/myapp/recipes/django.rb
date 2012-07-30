@@ -9,8 +9,8 @@ app_node = node[:myapp]
 app_dir = app_node['deploy_to'] || "/home/#{app_node[:owner]}/#{app_id}"
 
 PYTHON_BUNDLES = [
-    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Django-1.4-py27-1.pybundle",
-    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Celery-2.5-py27-1.pybundle",
+    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Django-1.4.1-py27-1.pybundle",
+    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Celery-3.0.4-py27-1.pybundle",
 ]
 
 PYTHON_PACKAGES = {
@@ -43,13 +43,14 @@ if app_node[:vagrant_links]
   end
 end
 
-# settings_local.py
-if app_node[:settings_local]
-  template "#{app_dir}/etc/settings_local.py" do
-    source app_node[:settings_local]
+# settings_production.py
+if app_node[:settings_template]
+  template "#{app_dir}/src/project/settings_production.py" do
+    source app_node[:settings_template]
     owner app_node[:owner]
     group app_node[:group]
     mode "0644"
+    variables :app_id => app_id, :app_dir => app_dir, :app_node => app_node
   end
 end
 
@@ -121,9 +122,10 @@ file "#{app_dir}/bin/manage.py" do
   content <<-EOH
 #!/bin/sh
 . #{app_dir}/env/bin/activate
-cd #{app_dir}
+cd #{app_dir}/src
 export PROJECT_ROOT=#{app_dir}
 export PYTHONPATH=#{app_dir}/src
+export DJANGO_SETTINGS_MODULE=#{app_node[:settings]}
 python manage.py $@
 EOH
 end

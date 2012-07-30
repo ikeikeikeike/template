@@ -15,12 +15,13 @@ Vagrant::Config.run do |config|
       :myapp => {
         :owner => 'vagrant',
         :group => 'vagrant',
-        :settings => 'project.settings_devel',
         :web_port => '8000',
         # for vagrant
+        :settings => 'project.settings_devel',
         :vagrant_links => ['etc', 'log', 'src'],
         # for production
-#        :local_settings => 'production.py.erb',
+#        :settings => 'project.settings_production',
+#        :settings_template => 'production.py.erb',
 #        :db_host => 'localhost',
 #        :db_name => 'template',
 #        :db_user => 'username',

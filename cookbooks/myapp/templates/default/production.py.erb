@@ -1,13 +1,15 @@
+from .settings import *
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '<%= node[:myapp][:db_name] %>',
-        'USER': '<%= node[:myapp][:db_user] %>',
-        'PASSWORD': '<%= node[:myapp][:db_password] %>',
-        'HOST': '<%= node[:myapp][:db_host] %>',
+        'NAME': '<%= @app_node[:db_name] %>',
+        'USER': '<%= @app_node[:db_user] %>',
+        'PASSWORD': '<%= @app_node[:db_password] %>',
+        'HOST': '<%= @app_node[:db_host] %>',
         'PORT': '',
     }
 }
 
-MYAPP_USERNAME = "<%= node[:myapp][:my_username] %>"
-MYAPP_PASSWORD = "<%= node[:myapp][:my_password] %>"
+MYAPP_USERNAME = "<%= @app_node[:my_username] %>"
+MYAPP_PASSWORD = "<%= @app_node[:my_password] %>"

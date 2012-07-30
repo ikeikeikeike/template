@@ -1,6 +1,7 @@
-*.log
 *.pot
 *.pyc
 .vagrant
+local_settings.py
+settings_production.py
 etc/gunicorn.py
-etc/local_settings.py
+log/*.log

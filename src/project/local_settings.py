@@ -1,1 +1,0 @@
-../../etc/local_settings.py
