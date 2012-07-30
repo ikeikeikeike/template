@@ -2,7 +2,6 @@
 
 app_id = 'myapp'
 app_node = node[:myapp]
-app_data = data_bag_item('apps', app_id)
 app_dir = app_node['deploy_to'] || "/home/#{app_node[:owner]}/#{app_id}"
 
 # application directories

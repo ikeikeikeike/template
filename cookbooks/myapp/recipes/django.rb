@@ -1,13 +1,26 @@
 # The Django application stack
 # 
-# Author: Keisuke Nishida
-# Version: 0.4
-# Date: 2012-06-13
+# Author: Keisuke Nishida <knishida@bizmobile.co.jp>
+# Version: 0.5
+# Date: 2012-07-31
 
 app_id = 'myapp'
 app_node = node[:myapp]
-app_data = data_bag_item('apps', app_id)
 app_dir = app_node['deploy_to'] || "/home/#{app_node[:owner]}/#{app_id}"
+
+PYTHON_BUNDLES = [
+    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Django-1.4-py27-1.pybundle",
+    "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/chef/python/Celery-2.5-py27-1.pybundle",
+]
+
+PYTHON_PACKAGES = {
+  "libmysqlclient-dev" => "latest",
+  "memcached" => "latest",
+}
+
+PYTHON_PIPS = {
+  "python-memcached" => "latest",
+}
 
 # python setup
 
@@ -30,8 +43,8 @@ python_virtualenv app_id do
   action :create
 end
 
-if app_data['packages']
-  app_data['packages'].each do |pkg,ver|
+if PYTHON_PACKAGES
+  PYTHON_PACKAGES.each do |pkg,ver|
     package pkg do
       action :install
       version ver if ver && ver != "latest"
@@ -39,8 +52,8 @@ if app_data['packages']
   end
 end
 
-if app_data['pybundles']
-  app_data['pybundles'].each do |pybundle|
+if PYTHON_BUNDLES
+  PYTHON_BUNDLES.each do |pybundle|
     file_name = pybundle.split(/[\\\/]/).last
 
     remote_file "#{app_dir}/env/#{file_name}" do
@@ -59,8 +72,8 @@ if app_data['pybundles']
   end
 end
 
-if app_data['pips']
-  app_data['pips'].each do |pip,ver|
+if PYTHON_PIPS
+  PYTHON_PIPS.each do |pip,ver|
     python_pip pip do
       version ver if ver && ver != "latest"
       virtualenv "#{app_dir}/env"
