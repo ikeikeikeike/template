@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-BOX = "ubuntu-12.04-x86_64-4"
-BOX_URL = "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/boxes/ubuntu-12.04-x86_64-4.box"
+BOX = "ubuntu-12.04-x86_64-5"
+BOX_URL = "http://bizmo.s3-website-ap-northeast-1.amazonaws.com/boxes/ubuntu-12.04-x86_64-5.box"
 COOKBOOKS_PATH = "cookbooks"
 DATA_BAGS_PATH = "data_bags"
 
