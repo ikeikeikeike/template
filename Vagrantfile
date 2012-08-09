@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = COOKBOOKS_PATH
     chef.add_recipe("myapp::django")
+    chef.add_recipe("myapp::celery")
     chef.json = {
       :myapp => {
         :owner => 'vagrant',

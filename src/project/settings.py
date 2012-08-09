@@ -197,6 +197,13 @@ LOGGING = {
     }
 }
 
+## celery
+
+INSTALLED_APPS += ('djcelery',)
+
+import djcelery
+djcelery.setup_loader()
+
 ## application
 
 MYAPP_USERNAME = ''
