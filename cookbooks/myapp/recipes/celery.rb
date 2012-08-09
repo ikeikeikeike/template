@@ -29,6 +29,14 @@ end
 
 # celery worker
 
+template "#{app_dir}/etc/celeryconfig" do
+  source "celeryconfig.erb"
+  owner app_node[:owner]
+  group app_node[:group]
+  mode "0644"
+  variables :app_id => app_id, :app_dir => app_dir, :app_node => app_node
+end
+
 file "/etc/init/celeryd.conf" do
   owner "root"
   group "root"
@@ -40,7 +48,7 @@ start on runlevel [2345]
 stop on runlevel [!2345]
 
 script
-  exec #{app_dir}/bin/manage.py celery worker -f /var/log/celery/celeryd.log -l INFO
+  exec #{app_dir}/bin/manage.py celery worker --config "#{app_dir}/etc/celeryconfig"
 end script
 EOH
   notifies :restart, "service[celeryd]"
