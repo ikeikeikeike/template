@@ -8,6 +8,7 @@ COOKBOOKS_PATH = "cookbooks"
 Vagrant::Config.run do |config|
   config.vm.box = BOX
   config.vm.box_url = BOX_URL
+  config.vm.forward_port 8000, 8000
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = COOKBOOKS_PATH
     chef.add_recipe("myapp::django")
