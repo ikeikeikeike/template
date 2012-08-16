@@ -3,27 +3,27 @@ from celeryconfig import *
 from kombu import Queue
 
 
-# ‹N“®—p‚ÌQueue - Set boot queue
+# èµ·å‹•ç”¨ã®Queue - Set boot queue
 CELERY_QUEUES = (
     Queue("fast", ),
 )
 
 
-""" QueueŽóMÝ’è
+""" Queueå—ä¿¡è¨­å®š
 
-‚Ç‚ÌCelery‚ÅƒŒƒV[ƒu‚·‚é‚©Ý’èo—ˆ‚é‚Ý‚½‚¢
-
-
-.. note:: ‰½“x‚àŽŽ‚µ‚½‚ªãŽè‚­o—ˆ‚½ŽŽ‚µ‚ª‚È‚¢
+ã©ã®Celeryã§ãƒ¬ã‚·ãƒ¼ãƒ–ã™ã‚‹ã‹è¨­å®šå‡ºæ¥ã‚‹ã¿ãŸã„
 
 
-**‰º‹L‚Æ“¯“™‚Ìˆ—‚ª‰Â”\‚ç‚µ‚¢**
+.. note:: ä½•åº¦ã‚‚è©¦ã—ãŸãŒä¸Šæ‰‹ãå‡ºæ¥ãŸè©¦ã—ãŒãªã„
+
+
+**ä¸‹è¨˜ã¨åŒç­‰ã®å‡¦ç†ãŒå¯èƒ½ã‚‰ã—ã„**
 
 ::
 
     from celery import task
 
-    # ˆø”‚ðŽw’è‚µ‚È‚­‚Ä‚àƒŒƒV[ƒo[‚ÌÝ’è‚ª‰Â”\
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½è‚µï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½oï¿½[ï¿½ÌÝ’è‚ªï¿½Â”\
     # e.p.) @task(queue="fast")
     #
     @task
