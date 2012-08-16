@@ -23,7 +23,7 @@ CELERY_QUEUES = (
 
     from celery import task
 
-    # �������w�肵�Ȃ��Ă����V�[�o�[�̐ݒ肪�\
+    # 引数を指定しなくてもレシーバーの設定が可能
     # e.p.) @task(queue="fast")
     #
     @task
