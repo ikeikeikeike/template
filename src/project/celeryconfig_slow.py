@@ -1,0 +1,1 @@
+../../etc/celeryconfig_slow.py

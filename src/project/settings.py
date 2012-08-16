@@ -116,6 +116,10 @@ INSTALLED_APPS = (
 
     # application
     'myapp',
+    'fast',
+    'slow',
+    'beat',
+    'normal',
 )
 
 ## logging
@@ -197,14 +201,6 @@ LOGGING = {
     }
 }
 
-## celery
 
+# celery
 INSTALLED_APPS += ('djcelery',)
-
-import djcelery
-djcelery.setup_loader()
-
-## application
-
-MYAPP_USERNAME = ''
-MYAPP_PASSWORD = ''

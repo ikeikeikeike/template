@@ -1,5 +1,5 @@
 # The Django application stack
-# 
+#
 # Author: Keisuke Nishida <knishida@bizmobile.co.jp>
 # Version: 0.5
 # Date: 2012-07-31
@@ -130,6 +130,14 @@ python manage.py $@
 EOH
 end
 
+# add
+execute "syncdb" do
+  command "#{app_dir}/bin/manage.py syncdb --noinput"
+  user app_node[:owner]
+  group app_node[:group]
+end
+
+
 # gunicorn
 
 GUNICORN_CONF = "#{app_dir}/etc/gunicorn.py"
@@ -155,7 +163,7 @@ file "/etc/init/#{app_id}.conf" do
   group "root"
   mode "0644"
   action :create
-  content <<-EOH
+  content <<EOH
 description "Application server for #{app_id}"
 start on runlevel [2345]
 stop on runlevel [!2345]

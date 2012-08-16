@@ -1,5 +1,5 @@
 # The Django Celery stack
-# 
+#
 # Author: Keisuke Nishida <knishida@bizmobile.co.jp>
 # Version: 0.1
 # Date: 2012-08-09
@@ -29,8 +29,8 @@ end
 
 # celery worker
 
-template "#{app_dir}/etc/celeryconfig" do
-  source "celeryconfig.erb"
+template "#{app_dir}/etc/celeryconfig.py" do
+  source "celeryconfig.py.erb"
   owner app_node[:owner]
   group app_node[:group]
   mode "0644"
@@ -48,7 +48,7 @@ start on runlevel [2345]
 stop on runlevel [!2345]
 
 script
-  exec #{app_dir}/bin/manage.py celery worker --config "#{app_dir}/etc/celeryconfig"
+  exec #{app_dir}/bin/manage.py celery worker --config "#{app_dir}/etc/celeryconfig.py"
 end script
 EOH
   notifies :restart, "service[celeryd]"

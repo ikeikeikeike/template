@@ -1,0 +1,1 @@
+../../etc/celeryconfig.py
