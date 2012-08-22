@@ -24,7 +24,7 @@ CELERY_QUEUES = (
     from celery import task
 
     # 引数を指定しなくてもレシーバーの設定が可能
-    # e.p.) @task(queue="fast")
+    # e.g.) @task(queue="fast")
     #
     @task
     def fast():
